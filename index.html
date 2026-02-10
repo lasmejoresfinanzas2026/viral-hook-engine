@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Viral Hook Engine</title>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f8f9fa;
+  font-family: Arial, sans-serif;
+  color: #111;
+}
+
+.container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.sub {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+input, select {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+button {
+  padding: 14px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+}
+
+.generate {
+  background: #111;
+  color: #fff;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.generate:hover {
+  background: #333;
+}
+
+.hook {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.locked {
+  filter: blur(4px);
+  user-select: none;
+}
+
+.unlock {
+  background: #0070f3;
+  color: #fff;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.unlock:hover {
+  background: #0059c9;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Viral Hook Engine</h1>
+<div class="sub">
+Generate high-converting hooks for TikTok, YouTube Shorts & Instagram Reels in seconds.
+</div>
+
+<input type="text" id="topic" placeholder="What is your video about?">
+<select id="platform">
+  <option value="All">All Platforms</option>
+  <option value="TikTok">TikTok</option>
+  <option value="YouTube Shorts">YouTube Shorts</option>
+  <option value="Instagram Reels">Instagram Reels</option>
+</select>
+
+<button class="generate" onclick="generateHooks()">Generate Hooks</button>
+
+<div id="results"></div>
+
+<button class="unlock" onclick="unlockPro()">
+Unlock 25 Pro Hooks – €7
+</button>
+
+</div>
+
+<script>
+
+const STRIPE_URL = "https://buy.stripe.com/00w3cv1fY8ch1i6fEDco004";
+
+function generateHooks() {
+  const topic = document.getElementById("topic").value;
+  const platform = document.getElementById("platform").value;
+  const results = document.getElementById("results");
+
+  if (!topic) {
+    alert("Enter a topic first.");
+    return;
+  }
+
+  const patterns = [
+    "Nobody talks about " + topic,
+    "This is why you're failing at " + topic,
+    "If you're serious about " + topic + ", watch this.",
+    "Stop scrolling if you care about " + topic,
+    "You're doing " + topic + " completely wrong.",
+    "I tried " + topic + " for 30 days. Here's what happened.",
+    "This changed everything about " + topic,
+    "Before you start " + topic + ", know this.",
+    "The biggest mistake in " + topic,
+    "This simple trick improves your " + topic,
+    "What nobody tells you about " + topic,
+    "I wish I knew this about " + topic + " sooner.",
+    "This is the truth about " + topic,
+    "If you're struggling with " + topic + ", listen.",
+    "This hack makes " + topic + " easier.",
+    "Why most people fail at " + topic,
+    "This one rule changed my " + topic,
+    "Don't start " + topic + " without this.",
+    "The secret behind successful " + topic,
+    "You're wasting time on " + topic,
+    "Do this before trying " + topic,
+    "This mistake is killing your " + topic,
+    "The fastest way to improve your " + topic,
+    "Most people misunderstand " + topic,
+    "Here's the smarter way to approach " + topic
+  ];
+
+  results.innerHTML = "";
+
+  patterns.forEach((hook, index) => {
+    const div = document.createElement("div");
+    div.className = "hook";
+
+    if (index >= 3) {
+      div.classList.add("locked");
+    }
+
+    div.textContent = hook + " (" + platform + ")";
+    results.appendChild(div);
+  });
+}
+
+function unlockPro() {
+  window.location.href = STRIPE_URL;
+}
+
+</script>
+
+</body>
+</html>
