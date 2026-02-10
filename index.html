@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="google-site-verification" content="8zmMAGoHqyWJBqeZsiMjZSDEaYyEJLfjxhDi_SLyhZg" />
 
-<!-- PEGA AQUÍ EXACTAMENTE LA META COMPLETA QUE TE DIO GOOGLE -->
-<meta name="google-site-verification" content="PEGA_AQUI_EL_CODIGO_COMPLETO_DE_GOOGLE" />
+<title>Viral Hook Generator for TikTok, YouTube Shorts & Instagram Reels</title>
 
-<title>Viral Hook Generator for TikTok, YouTube Shorts & Instagram Reels (Free Tool)</title>
-
-<meta name="description" content="Free viral hook generator for TikTok, YouTube Shorts and Instagram Reels. Generate high-converting hooks instantly and unlock 25 pro hooks for serious content creators.">
+<meta name="description" content="Free viral hook generator for TikTok, YouTube Shorts and Instagram Reels. Generate scroll-stopping hooks and unlock 25 high-converting pro hooks used by viral creators.">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -33,7 +31,7 @@ h1 {
 }
 
 h2 {
-  margin-top: 50px;
+  margin-top: 60px;
   font-size: 24px;
 }
 
@@ -92,7 +90,7 @@ button {
 }
 
 .section {
-  margin-top: 40px;
+  margin-top: 20px;
   line-height: 1.6;
   color: #444;
 }
@@ -121,26 +119,24 @@ Generate high-converting hooks for TikTok, YouTube Shorts & Instagram Reels in s
 <div id="results"></div>
 
 <button class="unlock" onclick="unlockPro()">
-Unlock 25 Pro Hooks – €7
+Unlock 25 High-Converting Hooks Used by Viral Creators – €7
 </button>
 
-<h2>What is a Viral Hook?</h2>
+<!-- ================= SEO SECTIONS ================= -->
+
+<h2>TikTok Hooks Generator</h2>
 <div class="section">
-A viral hook is the first sentence of your video that captures attention instantly. On platforms like TikTok, YouTube Shorts and Instagram Reels, you have less than 3 seconds to stop the scroll.
+This TikTok hooks generator helps you create scroll-stopping openings designed specifically for TikTok’s fast-paced algorithm. Strong TikTok hooks increase watch time, retention and viral potential.
 </div>
 
-<h2>Examples of High-Converting Hooks</h2>
+<h2>YouTube Shorts Hooks Generator</h2>
 <div class="section">
-• Nobody talks about this in fitness.<br>
-• You’re doing trading completely wrong.<br>
-• If you’re serious about growing on TikTok, watch this.<br>
-• Stop scrolling if you care about making money online.<br>
-• This changed everything about my business.
+Create powerful YouTube Shorts hooks that maximize retention in the first 3 seconds. YouTube Shorts rewards strong openings that maintain viewer attention and increase session time.
 </div>
 
-<h2>How to Write Better Hooks for Short-Form Content</h2>
+<h2>Instagram Reels Hooks Generator</h2>
 <div class="section">
-The best hooks create curiosity, tension or immediate value. Use pattern interrupts, challenge common beliefs, or promise a clear result.
+Generate Instagram Reels hooks that stop the scroll and drive engagement. Reels with strong hooks increase saves, shares and overall reach.
 </div>
 
 </div>
@@ -159,32 +155,42 @@ function generateHooks() {
     return;
   }
 
+  let platformModifier = "";
+
+  if (platform === "TikTok") {
+    platformModifier = " on TikTok";
+  } else if (platform === "YouTube Shorts") {
+    platformModifier = " on YouTube Shorts";
+  } else if (platform === "Instagram Reels") {
+    platformModifier = " on Instagram Reels";
+  }
+
   const patterns = [
-    "Nobody talks about " + topic,
-    "This is why you're failing at " + topic,
-    "If you're serious about " + topic + ", watch this.",
-    "Stop scrolling if you care about " + topic,
-    "You're doing " + topic + " completely wrong.",
-    "I tried " + topic + " for 30 days. Here's what happened.",
-    "This changed everything about " + topic,
-    "Before you start " + topic + ", know this.",
-    "The biggest mistake in " + topic,
-    "This simple trick improves your " + topic,
-    "What nobody tells you about " + topic,
-    "I wish I knew this about " + topic + " sooner.",
-    "This is the truth about " + topic,
-    "If you're struggling with " + topic + ", listen.",
-    "This hack makes " + topic + " easier.",
-    "Why most people fail at " + topic,
-    "This one rule changed my " + topic,
-    "Don't start " + topic + " without this.",
-    "The secret behind successful " + topic,
-    "You're wasting time on " + topic,
-    "Do this before trying " + topic,
-    "This mistake is killing your " + topic,
-    "The fastest way to improve your " + topic,
-    "Most people misunderstand " + topic,
-    "Here's the smarter way to approach " + topic
+    "Nobody talks about " + topic + platformModifier,
+    "This is why you're failing at " + topic + platformModifier,
+    "If you're serious about " + topic + platformModifier + ", watch this.",
+    "Stop scrolling if you care about " + topic + platformModifier,
+    "You're doing " + topic + " completely wrong" + platformModifier + ".",
+    "I tried " + topic + platformModifier + " for 30 days. Here's what happened.",
+    "This changed everything about " + topic + platformModifier,
+    "Before you start " + topic + platformModifier + ", know this.",
+    "The biggest mistake in " + topic + platformModifier,
+    "This simple trick improves your " + topic + platformModifier,
+    "What nobody tells you about " + topic + platformModifier,
+    "I wish I knew this about " + topic + platformModifier + " sooner.",
+    "This is the truth about " + topic + platformModifier,
+    "If you're struggling with " + topic + platformModifier + ", listen.",
+    "This hack makes " + topic + platformModifier + " easier.",
+    "Why most people fail at " + topic + platformModifier,
+    "This one rule changed my " + topic + platformModifier,
+    "Don't start " + topic + platformModifier + " without this.",
+    "The secret behind successful " + topic + platformModifier,
+    "You're wasting time on " + topic + platformModifier,
+    "Do this before trying " + topic + platformModifier,
+    "This mistake is killing your " + topic + platformModifier,
+    "The fastest way to improve your " + topic + platformModifier,
+    "Most people misunderstand " + topic + platformModifier,
+    "Here's the smarter way to approach " + topic + platformModifier
   ];
 
   results.innerHTML = "";
@@ -197,7 +203,7 @@ function generateHooks() {
       div.classList.add("locked");
     }
 
-    div.textContent = hook + " (" + platform + ")";
+    div.textContent = hook;
     results.appendChild(div);
   });
 }
