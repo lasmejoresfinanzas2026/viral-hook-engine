@@ -6,7 +6,7 @@
 
 <title>Viral Hook Generator for TikTok, YouTube Shorts & Instagram Reels</title>
 
-<meta name="description" content="Free viral hook generator for TikTok, YouTube Shorts and Instagram Reels. Generate scroll-stopping hooks and unlock 25 high-converting pro hooks used by viral creators.">
+<meta name="description" content="Professional viral hook generator for TikTok, YouTube Shorts and Instagram Reels. Generate high-retention hooks and unlock advanced creator formulas.">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,15 +30,21 @@ h1 {
   margin-bottom: 10px;
 }
 
-h2 {
-  margin-top: 60px;
-  font-size: 24px;
-}
-
 .sub {
   font-size: 18px;
   color: #555;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.usage {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.limit-warning {
+  color: #c00;
+  font-weight: bold;
 }
 
 input, select {
@@ -59,7 +65,7 @@ button {
   background: #111;
   color: #fff;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .generate:hover {
@@ -71,6 +77,17 @@ button {
   margin-bottom: 10px;
   background: #fff;
   border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy-btn {
+  background: #eee;
+  border: none;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .locked {
@@ -82,15 +99,21 @@ button {
   background: #0070f3;
   color: #fff;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .unlock:hover {
   background: #0059c9;
 }
 
+.notice {
+  font-size: 13px;
+  color: #888;
+  margin-top: 10px;
+}
+
 .section {
-  margin-top: 20px;
+  margin-top: 60px;
   line-height: 1.6;
   color: #444;
 }
@@ -102,11 +125,18 @@ button {
 <div class="container">
 
 <h1>Viral Hook Generator</h1>
+
 <div class="sub">
-Generate high-converting hooks for TikTok, YouTube Shorts & Instagram Reels in seconds.
+Create scroll-stopping hooks for TikTok, YouTube Shorts & Instagram Reels.
+</div>
+
+<div class="usage">
+Daily free uses: <span id="usesLeft"></span>
+<span id="limitText"></span>
 </div>
 
 <input type="text" id="topic" placeholder="What is your video about?">
+
 <select id="platform">
   <option value="All">All Platforms</option>
   <option value="TikTok">TikTok</option>
@@ -119,24 +149,28 @@ Generate high-converting hooks for TikTok, YouTube Shorts & Instagram Reels in s
 <div id="results"></div>
 
 <button class="unlock" onclick="unlockPro()">
-Unlock 25 High-Converting Hooks Used by Viral Creators – €7
+Unlock All 25 Advanced Hooks – €7
 </button>
 
-<!-- ================= SEO SECTIONS ================= -->
+<div class="notice">
+One-time payment. Instant access. No subscription.
+</div>
 
+<!-- SEO CONTENT -->
+
+<div class="section">
 <h2>TikTok Hooks Generator</h2>
-<div class="section">
-This TikTok hooks generator helps you create scroll-stopping openings designed specifically for TikTok’s fast-paced algorithm. Strong TikTok hooks increase watch time, retention and viral potential.
+High-retention TikTok hooks increase watch time and improve algorithm performance.
 </div>
 
+<div class="section">
 <h2>YouTube Shorts Hooks Generator</h2>
-<div class="section">
-Create powerful YouTube Shorts hooks that maximize retention in the first 3 seconds. YouTube Shorts rewards strong openings that maintain viewer attention and increase session time.
+Short-form content success depends heavily on the first 3 seconds.
 </div>
 
-<h2>Instagram Reels Hooks Generator</h2>
 <div class="section">
-Generate Instagram Reels hooks that stop the scroll and drive engagement. Reels with strong hooks increase saves, shares and overall reach.
+<h2>Instagram Reels Hooks Generator</h2>
+Reels with strong opening hooks generate more saves, shares and engagement.
 </div>
 
 </div>
@@ -144,8 +178,43 @@ Generate Instagram Reels hooks that stop the scroll and drive engagement. Reels 
 <script>
 
 const STRIPE_URL = "https://buy.stripe.com/00w3cv1fY8ch1i6fEDco004";
+const DAILY_LIMIT = 5;
+
+function getTodayKey() {
+  const today = new Date();
+  return "uses_" + today.getFullYear() + "_" + today.getMonth() + "_" + today.getDate();
+}
+
+function getUses() {
+  return parseInt(localStorage.getItem(getTodayKey()) || "0");
+}
+
+function incrementUses() {
+  localStorage.setItem(getTodayKey(), getUses() + 1);
+}
+
+function updateUsageDisplay() {
+  const used = getUses();
+  const left = DAILY_LIMIT - used;
+  document.getElementById("usesLeft").textContent = left > 0 ? left : 0;
+
+  if (left <= 0) {
+    document.getElementById("limitText").innerHTML =
+      ' <span class="limit-warning">Daily limit reached.</span>';
+  } else {
+    document.getElementById("limitText").textContent = "";
+  }
+}
+
+updateUsageDisplay();
 
 function generateHooks() {
+
+  if (getUses() >= DAILY_LIMIT) {
+    alert("Daily free limit reached. Unlock full access.");
+    return;
+  }
+
   const topic = document.getElementById("topic").value;
   const platform = document.getElementById("platform").value;
   const results = document.getElementById("results");
@@ -155,42 +224,40 @@ function generateHooks() {
     return;
   }
 
-  let platformModifier = "";
+  incrementUses();
+  updateUsageDisplay();
 
-  if (platform === "TikTok") {
-    platformModifier = " on TikTok";
-  } else if (platform === "YouTube Shorts") {
-    platformModifier = " on YouTube Shorts";
-  } else if (platform === "Instagram Reels") {
-    platformModifier = " on Instagram Reels";
+  let modifier = "";
+  if (platform !== "All") {
+    modifier = " on " + platform;
   }
 
   const patterns = [
-    "Nobody talks about " + topic + platformModifier,
-    "This is why you're failing at " + topic + platformModifier,
-    "If you're serious about " + topic + platformModifier + ", watch this.",
-    "Stop scrolling if you care about " + topic + platformModifier,
-    "You're doing " + topic + " completely wrong" + platformModifier + ".",
-    "I tried " + topic + platformModifier + " for 30 days. Here's what happened.",
-    "This changed everything about " + topic + platformModifier,
-    "Before you start " + topic + platformModifier + ", know this.",
-    "The biggest mistake in " + topic + platformModifier,
-    "This simple trick improves your " + topic + platformModifier,
-    "What nobody tells you about " + topic + platformModifier,
-    "I wish I knew this about " + topic + platformModifier + " sooner.",
-    "This is the truth about " + topic + platformModifier,
-    "If you're struggling with " + topic + platformModifier + ", listen.",
-    "This hack makes " + topic + platformModifier + " easier.",
-    "Why most people fail at " + topic + platformModifier,
-    "This one rule changed my " + topic + platformModifier,
-    "Don't start " + topic + platformModifier + " without this.",
-    "The secret behind successful " + topic + platformModifier,
-    "You're wasting time on " + topic + platformModifier,
-    "Do this before trying " + topic + platformModifier,
-    "This mistake is killing your " + topic + platformModifier,
-    "The fastest way to improve your " + topic + platformModifier,
-    "Most people misunderstand " + topic + platformModifier,
-    "Here's the smarter way to approach " + topic + platformModifier
+    "Nobody talks about " + topic + modifier,
+    "This is why you're failing at " + topic + modifier,
+    "If you're serious about " + topic + modifier + ", watch this.",
+    "Stop scrolling if you care about " + topic + modifier,
+    "You're doing " + topic + " completely wrong" + modifier + ".",
+    "I tested " + topic + modifier + " for 30 days. Here's what happened.",
+    "Before you try " + topic + modifier + ", know this.",
+    "The biggest mistake in " + topic + modifier,
+    "What nobody tells you about " + topic + modifier,
+    "This trick changes everything about " + topic + modifier,
+    "Why most people fail at " + topic + modifier,
+    "Don't start " + topic + modifier + " without this.",
+    "The secret behind successful " + topic + modifier,
+    "This mistake is killing your " + topic + modifier,
+    "The fastest way to improve your " + topic + modifier,
+    "Here's the smarter way to approach " + topic + modifier,
+    "This is the truth about " + topic + modifier,
+    "You’re wasting time on " + topic + modifier,
+    "Do this before posting about " + topic + modifier,
+    "Most creators misunderstand " + topic + modifier,
+    "This rule changed my results in " + topic + modifier,
+    "If you're struggling with " + topic + modifier + ", listen.",
+    "The hidden formula behind " + topic + modifier,
+    "Why your " + topic + modifier + " isn’t growing.",
+    "This small change improves your " + topic + modifier
   ];
 
   results.innerHTML = "";
@@ -201,11 +268,22 @@ function generateHooks() {
 
     if (index >= 3) {
       div.classList.add("locked");
+      div.textContent = hook;
+    } else {
+      div.innerHTML =
+        hook +
+        '<button class="copy-btn" onclick="copyHook(this)">Copy</button>';
     }
 
-    div.textContent = hook;
     results.appendChild(div);
   });
+}
+
+function copyHook(btn) {
+  const text = btn.parentElement.firstChild.textContent;
+  navigator.clipboard.writeText(text);
+  btn.textContent = "Copied";
+  setTimeout(() => btn.textContent = "Copy", 1000);
 }
 
 function unlockPro() {
